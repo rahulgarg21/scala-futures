@@ -1,0 +1,35 @@
+apply plugin: 'scala'
+apply plugin: 'idea'
+apply plugin: 'eclipse-wtp'
+
+group = 'com.polyglot.scala'
+archivesBaseName = 'scala-futures'
+version = '1.0-SNAPSHOT'
+
+repositories {
+	mavenCentral()
+}
+
+ext.scala_version = '2.11'
+ext.ver = [
+	scala_library	:	(scala_version + '.6'),
+	logback			:	'1.1.2',
+	//testing
+	junit			: 	'4.12',
+	scalatest		:	'2.2.0',
+]
+
+dependencies{
+	compile(
+		//-------------scala----------------
+		[group:'org.scala-lang', name:'scala-library', version:ver.scala_library],
+		//-------------logging--------------
+		[group:'ch.qos.logback', name:'logback-classic', version:ver.logback],
+	)
+	
+	testCompile(
+		[group:'junit', name:'junit', version:ver.junit],
+		[group:'org.scalatest', name:'scalatest_'+scala_version, version:ver.scalatest],
+	) 
+}
+
